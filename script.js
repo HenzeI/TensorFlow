@@ -14,8 +14,7 @@ function inicio() {
     
     async function setupCamera() {
         // Solicitar acceso a la cámara
-        //const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-        const stream = null
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
         video.srcObject = stream;
     }
     
