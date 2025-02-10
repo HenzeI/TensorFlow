@@ -75,7 +75,7 @@ function inicio() {
         cambiarCamara.addEventListener("click", (e) => {
             navigator.mediaDevices.getUserMedia({
                 video: {
-                    facingMode: { exact: 'enviroment'}
+                    facingMode: { exact: 'environment'}
                 }
             }).then(function(stream) {
                 video.srcObject = stream;
