@@ -48,6 +48,44 @@ function inicio() {
         loadModelAndPredict(canvas);
     });
     
+    ////////
+
+
+    let movil = {
+        Android: function() {
+            return navigator.userAgent.match(/Android/i) ? true : false;
+        },
+        iOS: function() {
+            return navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false;
+        },
+        any: function() {
+            return (movil.Android() || movil.iOS());
+        }
+    };
+    
+    if (movil.any()) {
+        
+        console.log("Contenido de para movil");
+
+        let cambiarCamara = document.createElement("button")
+        cambiarCamara.textContent = "Cámara trasera"
+        
+        document.getElementById("buttonContainer").appendChild(cambiarCamara)
+
+        cambiarCamara.addEventListener("click", (e) => {
+            navigator.mediaDevices.getUserMedia({
+                video: {
+                    facingMode: { exact: 'enviroment'}
+                }
+            }).then(function(stream) {
+                video.srcObject = stream;
+            }).catch(function(error) {
+                console.log("Error con la camara: ", error);
+            })
+        })
+
+    }
+    
 
     insertButton.addEventListener("click", () => {
         fileInput.click();
@@ -57,7 +95,6 @@ function inicio() {
         if (fileInput.files[0].type.includes("image/")) {
             
             let file = fileInput.files[0]
-            console.log(file);
             let reader = new FileReader()
             reader.onload = function(event) {
                 let img = new Image()
