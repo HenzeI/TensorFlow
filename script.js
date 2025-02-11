@@ -78,7 +78,7 @@ function inicio() {
                     facingMode: { exact: 'environment'}
                 }
             }).then(function(stream) {
-                console.log("A pasado el stream correctamente");
+                alert("A pasado el stream correctamente");
                 video.srcObject = stream;
             }).catch(function(error) {
                 alert("Error con la camara: " + error);
