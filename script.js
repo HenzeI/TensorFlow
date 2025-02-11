@@ -50,7 +50,6 @@ function inicio() {
     
     ////////
 
-
     let movil = {
         Android: function() {
             return navigator.userAgent.match(/Android/i) ? true : false;
@@ -72,21 +71,21 @@ function inicio() {
         
         document.getElementById("buttonContainer").appendChild(cambiarCamara)
 
+        // environment - camara trasera / user - camara frontal
         cambiarCamara.addEventListener("click", (e) => {
             navigator.mediaDevices.getUserMedia({
                 video: {
                     facingMode: { exact: 'environment'}
                 }
             }).then(function(stream) {
+                console.log("A pasado el stream correctamente");
                 video.srcObject = stream;
             }).catch(function(error) {
-                console.log("Error con la camara: ", error);
+                alert("Error con la camara: " + error);
             })
         })
-
     }
     
-
     insertButton.addEventListener("click", () => {
         fileInput.click();
     })
@@ -116,5 +115,3 @@ function inicio() {
     // Inicializar la cámara al cargar la página
     setupCamera();
 }
-
-
