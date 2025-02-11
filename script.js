@@ -77,6 +77,7 @@ function inicio() {
         cambiarCamara.addEventListener("click", (e) => {
             if(stream) {
                 stream.getTracks().forEach(track => track.stop())
+                alert(stream.getTracks());                
             }
 
             navigator.mediaDevices.getUserMedia({
