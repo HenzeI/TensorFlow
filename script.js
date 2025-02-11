@@ -12,9 +12,11 @@ function inicio() {
 
     const ctx = canvas.getContext('2d');
     
+    let stream
+
     async function setupCamera() {
         // Solicitar acceso a la cámara
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        stream = await navigator.mediaDevices.getUserMedia({ video: true });
         video.srcObject = stream;
     }
     
@@ -73,12 +75,16 @@ function inicio() {
 
         // environment - camara trasera / user - camara frontal
         cambiarCamara.addEventListener("click", (e) => {
+            if(stream) {
+                stream.getTracks().forEach(track => track.stop())
+            }
+
             navigator.mediaDevices.getUserMedia({
                 video: {
                     facingMode: { exact: 'environment'}
                 }
             }).then(function(stream) {
-                alert("A pasado el stream correctamente");
+                console.log("A pasado el stream correctamente");
                 video.srcObject = stream;
             }).catch(function(error) {
                 alert("Error con la camara: " + error);
@@ -86,6 +92,7 @@ function inicio() {
         })
     }
     
+
     insertButton.addEventListener("click", () => {
         fileInput.click();
     })
