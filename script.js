@@ -12,12 +12,12 @@ function inicio() {
 
     const ctx = canvas.getContext('2d');
     
-    let stream, posiCamara
+    let stream
+    let posiCamara = 'user' 
 
     async function setupCamera() {
         // Solicitar acceso a la cámara
         stream = await navigator.mediaDevices.getUserMedia({ video: true });
-        posiCamara = 'user'
         video.srcObject = stream;
     }
     
@@ -80,6 +80,8 @@ function inicio() {
                 stream.getTracks().forEach(track => track.stop())              
             }
 
+
+
             navigator.mediaDevices.getUserMedia({
                 video: {
                     facingMode: { exact: `${posiCamara}`}
@@ -90,12 +92,9 @@ function inicio() {
             }).catch(function(error) {
                 alert("Error con la camara: " + error);
             })
-
-            if (posiCamara == 'user')
-                posiCamara = 'environment'
-            else
-                posiCamara = 'user'
             
+            if (posiCamara == 'environment')
+                posiCamara = 'user'
         })
     }
     
