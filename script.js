@@ -69,22 +69,27 @@ function inicio() {
         
         console.log("Contenido de para movil");
 
-        let cambiarCamara = document.createElement("button")
-        cambiarCamara.textContent = "Cámara trasera"
+        let cambiarCamara1 = document.createElement("button")
+        cambiarCamara1.textContent = "Cámara trasera"
         
-        document.getElementById("buttonContainer").appendChild(cambiarCamara)
+        document.getElementById("buttonContainer").appendChild(cambiarCamara1)
+
+
+        let cambiarCamara2 = document.createElement("button")
+        cambiarCamara2.textContent = "Cámara Frontal"
+        
+        document.getElementById("buttonContainer").appendChild(cambiarCamara2)
+
 
         // environment - camara trasera / user - camara frontal
-        cambiarCamara.addEventListener("click", (e) => {
+        cambiarCamara1.addEventListener("click", (e) => {
             if(stream) {
                 stream.getTracks().forEach(track => track.stop())              
             }
 
-
-
             navigator.mediaDevices.getUserMedia({
                 video: {
-                    facingMode: { exact: `${posiCamara}`}
+                    facingMode: { exact: 'environment'}
                 }
             }).then(function(stream) {
                 console.log("A pasado el stream correctamente");
@@ -92,9 +97,23 @@ function inicio() {
             }).catch(function(error) {
                 alert("Error con la camara: " + error);
             })
-            
-            if (posiCamara == 'environment')
-                posiCamara = 'user'
+        })
+
+        cambiarCamara2.addEventListener("click", (e) => {
+            if(stream) {
+                stream.getTracks().forEach(track => track.stop())              
+            }
+
+            navigator.mediaDevices.getUserMedia({
+                video: {
+                    facingMode: { exact: 'user'}
+                }
+            }).then(function(stream) {
+                console.log("A pasado el stream correctamente");
+                video.srcObject = stream;
+            }).catch(function(error) {
+                alert("Error con la camara: " + error);
+            })
         })
     }
     
