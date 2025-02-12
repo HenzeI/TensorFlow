@@ -13,7 +13,7 @@ function inicio() {
     const ctx = canvas.getContext('2d');
     
     let streamCamara
-    let posiCamara = 'user' 
+    let posiCamara = 'environment' 
 
     async function setupCamera() {
         // Solicitar acceso a la cámara
@@ -89,7 +89,7 @@ function inicio() {
 
             navigator.mediaDevices.getUserMedia({
                 video: {
-                    facingMode: { exact: 'environment'}
+                    facingMode: { exact: `${posiCamara}`}
                 }
             }).then(function(stream) {
                 console.log("A pasado el stream correctamente");
@@ -98,9 +98,14 @@ function inicio() {
             }).catch(function(error) {
                 alert("Error con la camara: " + error);
             })
+
+            if (posiCamara == 'environment')
+                posiCamara = 'user'
+            else
+                posiCamara = 'environment'
         })
 
-        cambiarCamara2.addEventListener("click", (e) => {
+/*         cambiarCamara2.addEventListener("click", (e) => {
             if(streamCamara) {
                 streamCamara.getTracks().forEach(track => track.stop())              
             }
@@ -116,7 +121,7 @@ function inicio() {
             }).catch(function(error) {
                 alert("Error con la camara: " + error);
             })
-        })
+        }) */
     }
     
 
