@@ -75,10 +75,10 @@ function inicio() {
         document.getElementById("buttonContainer").appendChild(cambiarCamara1)
 
 
-        let cambiarCamara2 = document.createElement("button")
+/*         let cambiarCamara2 = document.createElement("button")
         cambiarCamara2.textContent = "Cámara Frontal"
         
-        document.getElementById("buttonContainer").appendChild(cambiarCamara2)
+        document.getElementById("buttonContainer").appendChild(cambiarCamara2) */
 
 
         // environment - camara trasera / user - camara frontal
