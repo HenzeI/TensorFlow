@@ -12,13 +12,13 @@ function inicio() {
 
     const ctx = canvas.getContext('2d');
     
-    let stream
+    let streamCamara
     let posiCamara = 'user' 
 
     async function setupCamera() {
         // Solicitar acceso a la cámara
-        stream = await navigator.mediaDevices.getUserMedia({ video: true });
-        video.srcObject = stream;
+        streamCamara = await navigator.mediaDevices.getUserMedia({ video: true });
+        video.srcObject = streamCamara;
     }
     
     async function loadModelAndPredict(image) {
@@ -83,8 +83,8 @@ function inicio() {
 
         // environment - camara trasera / user - camara frontal
         cambiarCamara1.addEventListener("click", (e) => {
-            if(stream) {
-                stream.getTracks().forEach(track => track.stop())              
+            if(streamCamara) {
+                streamCamara.getTracks().forEach(track => track.stop())              
             }
 
             navigator.mediaDevices.getUserMedia({
@@ -93,15 +93,16 @@ function inicio() {
                 }
             }).then(function(stream) {
                 console.log("A pasado el stream correctamente");
-                video.srcObject = stream;
+                streamCamara = stream;
+                video.srcObject = streamCamara;
             }).catch(function(error) {
                 alert("Error con la camara: " + error);
             })
         })
 
         cambiarCamara2.addEventListener("click", (e) => {
-            if(stream) {
-                stream.getTracks().forEach(track => track.stop())              
+            if(streamCamara) {
+                streamCamara.getTracks().forEach(track => track.stop())              
             }
 
             navigator.mediaDevices.getUserMedia({
@@ -110,7 +111,8 @@ function inicio() {
                 }
             }).then(function(stream) {
                 console.log("A pasado el stream correctamente");
-                video.srcObject = stream;
+                streamCamara = stream;
+                video.srcObject = streamCamara;
             }).catch(function(error) {
                 alert("Error con la camara: " + error);
             })
